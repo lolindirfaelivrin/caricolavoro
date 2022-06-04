@@ -1,0 +1,26 @@
+:root {
+    --colore-primario: #ddd;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* 62.5% of 16px browser font size is 10px */
+    font-size: 62.5%;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    line-height: 1.5;
+    /* 16px */    
+    font-size: 1.6rem;
+  }
+
+
+
+
