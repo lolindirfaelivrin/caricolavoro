@@ -11,9 +11,10 @@
     <title>Carico Lavoro</title>
 </head>
 <body>
-    <header>
-        <h1>Carico Lavoro</h1>
-    </header> 
+<header>
+	<h1>Carico Lavoro</h1>
+	<a href="vedi.php">Vedi Allenamenti</a>
+</header>
     <main>
         <h2>Nuovo Carivo lavoro</h2>
         <section class="carico">

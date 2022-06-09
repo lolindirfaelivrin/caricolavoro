@@ -29,7 +29,7 @@ $dati = $connessione->resultSet($sql);
 <body>
 <header>
 	<h1>Carico Lavoro</h1>
-	<a href="index.php" class="btn btn-outline">Aggiungi</a>
+	<a href="index.php">Aggiungi</a>
 </header>
 <section class="messaggio">
     <?php if(!empty($_SESSION['messaggio'])): ?>
