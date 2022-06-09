@@ -1,5 +1,5 @@
-# caricolavoro
-Gestione del carico di lavoro degli allenamenti
+# Carico Lavoro
+Gestione del carico di lavoro degli allenamenti.
 
 ## Versione 0.0
 Prima versione
