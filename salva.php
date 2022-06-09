@@ -12,9 +12,9 @@ if(isset($_POST)) {
     $datiCarico = [
         "caricoGiorno" => $_POST['carico-giorno'],
         "caricoInizio" => $_POST['carico-inizio'],
-        "caricoFine" => $_POST['carico-fine']
-        "caricoRpe" => $_POST['carico-rpe']
-        "caricoAllenamento" => $_POST['carico-allenamento']
+        "caricoFine" => $_POST['carico-fine'],
+        "caricoRpe" => $_POST['carico-rpe'],
+        "caricoAllenamento" => $_POST['carico-allenamento'],
         "caricoTipo" => $_POST['carico-tipo']
     ];
 

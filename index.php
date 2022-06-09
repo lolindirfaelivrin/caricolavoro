@@ -26,7 +26,7 @@
                 <label for="carico-inizio">Inizio</label>
                 <input type="time" name="carico-inizio" id="carico-inizio">
                 <label for="carico-inizio">Fine</label>
-                <input type="time" name="carico-inizio" id="carico-inizio">
+                <input type="time" name="carico-fine" id="carico-inizio">
             </div>
             <div class="carioco__dati">
                 <label for="carico-rpe">Rpe</label>
