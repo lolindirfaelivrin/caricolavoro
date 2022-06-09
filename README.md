@@ -1,2 +1,14 @@
 # caricolavoro
 Gestione del carico di lavoro degli allenamenti
+
+
+
+## Versione 0.2
+* Aggiungere ore di Sonno
+* Aggiungere numero di Passi
+* Aggiungere dolore muscolare
+
+
+## Versione 0.3 
+* Aggiungere Calorie Totali del giorno
+* Aggiungere divisione dei macronutrienti
