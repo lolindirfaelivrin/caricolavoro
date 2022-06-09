@@ -12,7 +12,11 @@ Versione funzionante
 * Aggiungere numero di Passi
 * Aggiungere dolore muscolare
 
+## Verisone 0.3
+* Aggiungere Peso
+* Aggiungere media settimanale peso
+* Aggiungere misure fisiche
 
-## Versione 0.3 
+## Versione 0.4
 * Aggiungere Calorie Totali del giorno
 * Aggiungere divisione dei macronutrienti
