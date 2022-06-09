@@ -56,7 +56,7 @@ $dati = $connessione->resultSet($sql);
                     <td><?php echo $wod->giorno ?></td>
                     <td><?php echo $wod->inizio ?></td>
                     <td><?php echo $wod->fine ?></td>
-                    <td>ore</td>
+                    <td><?php echo calcolaTempo($wod->inizio, $wod->fine)?></td>
                     <td><?php echo $wod->rpe ?></td>
                     <td><?php echo $wod->allenamento ?></td>
                     <td><?php echo $wod->tipo ?></td>
@@ -69,3 +69,14 @@ $dati = $connessione->resultSet($sql);
 
 </body>
 </html>
+
+<?php
+
+function calcolaTempo($inizio, $fine) {
+    $inizio = new DateTime($inizio);
+    $fine = new DateTime($fine);
+    $intervallo = $inizio->diff($fine);
+    return $intervallo->format('%s secondi');
+}
+
+?>
