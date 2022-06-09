@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'app/database.class.php';
+require 'lib/database.php';
 require 'config.php';
 
 $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
@@ -9,19 +9,19 @@ $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
 
 if(isset($_GET['id'])) {
 
-    $datiWod = [
-        "wodId" => filter_var( $_GET['id'], FILTER_SANITIZE_NUMBER_INT)
+    $datiCarico = [
+        "caricoId" => filter_var( $_GET['id'], FILTER_SANITIZE_NUMBER_INT)
     ];
 
-    if(eliminaWod($datiWod, $connessione)) {
+    if(eliminaWod($datiCarico, $connessione)) {
 
-        $_SESSION['messaggio'] = 'Wod eliminato correttamente';
+        $_SESSION['messaggio'] = 'Allenamento eliminato correttamente';
 
-        header("Location: http://demonation.altervista.org/minisiti/comptrain/vedi.php");
+        header("Location: http://demonation.altervista.org/minisiti/allenamento/carico/vedi.php");
     } else {
-        $_SESSION['messaggio'] = 'Non è stato possibile eliminare il wod';
+        $_SESSION['messaggio'] = 'Non è stato possibile eliminare i dati di allenamento';
 
-        header("Location: http://demonation.altervista.org/minisiti/comptrain/vedi.php");        
+        header("Location: http://demonation.altervista.org/minisiti/allenamento/carico/vedi.php");        
     }
 
 }
@@ -29,9 +29,9 @@ if(isset($_GET['id'])) {
 
 
 function eliminaWod($valori, $satabase) {
-    $satabase->query('DELETE FROM comptrain WHERE id = :id');
+    $satabase->query('DELETE FROM carico_lavoro WHERE id = :id');
 
-    $satabase->bind(':id', $valori['wodId']);
+    $satabase->bind(':id', $valori['caricoId']);
 
     if ($satabase->executeQuery()) {
         return true;
@@ -39,4 +39,3 @@ function eliminaWod($valori, $satabase) {
         return false;
     }
   }
-  
