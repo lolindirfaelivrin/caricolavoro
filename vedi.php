@@ -43,7 +43,7 @@ $dati = $connessione->resultSet($sql);
                 <th>Data</th>
                 <th>Inizio</th>
                 <th>Fine</th>
-                <th>Ore</th>
+                <th>Durata Allenamento</th>
                 <th>Rpe</th>
                 <th>Allenamento</th>
                 <th>Tipo</th>
@@ -73,10 +73,11 @@ $dati = $connessione->resultSet($sql);
 <?php
 
 function calcolaTempo($inizio, $fine) {
-    $inizio = new DateTime($inizio);
-    $fine = new DateTime($fine);
-    $intervallo = $inizio->diff($fine);
-    return $intervallo->format('%s secondi');
+    $inizio = strtotime($inizio);
+    $fine = strtotime($fine);     
+    $secondi = $fine - $inizio;                            
+    $intervallo = ($secondi/3600);
+    return $intervallo;
 }
 
 ?>
