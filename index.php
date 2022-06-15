@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+require 'lib/database.php';
+require 'config.php';
+
+$connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
+
+$ultimo = ultimoAllenamento($connessione);
+$totali = totaliAllenamento($connessione);
+
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -16,6 +28,12 @@
 	<a href="vedi.php">Vedi Allenamenti</a>
 </header>
     <main>
+        <section>
+            <p>Ciao, l'ultima volta ti sei allenato il giorno: <?php echo $ultimo->giorno; ?> per un totale di ore, 
+            <?php echo $ultimo->durata; A?>
+            con un carico di: <?php echo $ultimo->carico; ?></p>
+            <p>Al momento hai uno storico di allenamenti per un totale di ore.</p>
+        </section>
         <h2>Nuovo Carivo lavoro</h2>
         <section class="carico">
             <form action="salva.php" method="post">
@@ -60,3 +78,31 @@
     </main>
 </body>
 </html>
+
+
+<?php
+
+function ultimoAllenamento($connessione) {
+
+    $sql = "SELECT rpe, DATE_FORMAT(giorno, '%d %m) as giorno, TIME_DIFF(fine, inizio) as tempo 
+    FROM carico_lavoro 
+    ORDER BY giorno DESC LIMIT 1 ";
+
+    $stm = $coneessione->query($sql);
+
+    $row = $stm->singleRow($stm);
+
+    $dati = [
+        "giorno" => $row->giorno,
+        "durata" => $row->tempo,
+        "carico" => $row->rpe * $row->tempo
+    ]
+
+    return $dati;
+}
+
+function totaliAllenamento($connessione) {
+    $sql = "SELECT "
+}
+
+?>
