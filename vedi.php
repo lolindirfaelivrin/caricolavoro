@@ -24,6 +24,7 @@ $dati = $connessione->resultSet($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carico Lavoro</title>
+    <link href='https://css.gg/trash.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -65,7 +66,7 @@ $dati = $connessione->resultSet($sql);
                     <td><?php echo $wod->rpe ?></td>
                     <td><?php echo $wod->allenamento ?></td>
                     <td><?php echo $wod->tipo ?></td>
-                    <td><a href="elimina.php?id=<?php echo $wod->id ?>" data-id="<?php echo $wod->id ?>">Elimina</a></td>
+                    <td><a href="elimina.php?id=<?php echo $wod->id ?>" data-id="<?php echo $wod->id ?>"><i class="gg-trash"></i>/a></td>
 				</tr>
             <?php endforeach;   ?>    
         </tbody>
