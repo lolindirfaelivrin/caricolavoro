@@ -88,7 +88,7 @@ function ultimoAllenamento($connessione) {
     FROM carico_lavoro 
     ORDER BY giorno DESC LIMIT 1 ";
 
-    $stm = $coneessione->query($sql);
+    //$stm = $coneessione->query($sql);
 
     $row = $stm->singleRow($stm);
 
@@ -102,7 +102,19 @@ function ultimoAllenamento($connessione) {
 }
 
 function totaliAllenamento($connessione) {
-    $sql = "SELECT "
+    $sql = "SELECT COUNT(*) FROM carico_lavoro";
+    $stm = $connessione->query($sql);
+
+    $rowConteggio  = $stm->singleRow($stm);
+
+    $sql = "SELECT TIME_DIFF(fine, inizio) as durata";
+    //$stm = $connessione->query($sql);
+
+    $ore = $connessione->resultSet($sql);
+
 }
 
+function sommaOre($oraInizio, $oraFine) {
+
+}
 ?>
