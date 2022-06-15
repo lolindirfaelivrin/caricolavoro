@@ -7,7 +7,10 @@ require 'config.php';
 
 $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
 
-$sql = $connessione->query("SELECT * FROM carico_lavoro");
+$sql = $connessione->query("SELECT id,inizio,fine,rpe,allenamento,tipo, DATE_FORMAT(giorno, '%d %m %Y') as giorno,
+ TIMEDIFF(fine,inizio) as durata
+ FROM carico_lavoro
+ ORDER BY giorno DESC");
 
 $dati = $connessione->resultSet($sql);
 
@@ -40,6 +43,7 @@ $dati = $connessione->resultSet($sql);
 <table class="tabella__dati">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Data</th>
                 <th>Inizio</th>
                 <th>Fine</th>
@@ -53,10 +57,11 @@ $dati = $connessione->resultSet($sql);
         <tbody>
             <?php foreach($dati as $wod):  ?>
                 <tr>
+                    <td><?php echo $wod->id ?></td>
                     <td><?php echo $wod->giorno ?></td>
                     <td><?php echo $wod->inizio ?></td>
                     <td><?php echo $wod->fine ?></td>
-                    <td><?php echo calcolaTempo($wod->inizio, $wod->fine)?></td>
+                    <td><?php echo $wod->durata?></td>
                     <td><?php echo $wod->rpe ?></td>
                     <td><?php echo $wod->allenamento ?></td>
                     <td><?php echo $wod->tipo ?></td>
