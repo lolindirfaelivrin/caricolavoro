@@ -29,6 +29,17 @@ class Aiuti
         
         return $indirizzo;
     }
+
+    //https://dev.to/jeremysawesome/php-get-first-and-last-day-of-week-by-week-number-3pcd
+    public static function inizioEfineData($week, $year) {
+        $dateTime = new DateTime();
+        $dateTime->setISODate($year, $week);
+        $result['start_date'] = $dateTime->format('d-M-Y');
+        $dateTime->modify('+6 days');
+        $result['end_date'] = $dateTime->format('d-M-Y');
+        return $result;
+      }
+
 }
 
 
