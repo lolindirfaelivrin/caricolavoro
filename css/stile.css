@@ -1,25 +1,100 @@
 :root {
-    --colore-primario: #ddd;
-    --font-family: 'Roboto', sans-serif;
+  --colore-primario: #ddd;
+  --font-family: 'Roboto', sans-serif;
+  --table-row-stripped-background-color: #f6f8f9;
+  --table-border-color: #1f2d38;
+  --spacing: 1rem;
+--block-spacing-vertical: calc(var(--spacing) * 2);
+  --block-spacing-horizontal: var(--spacing);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    /* 62.5% of 16px browser font size is 10px */
-    font-size: 62.5%;
-  }
-  
-  body {
-    font-family: var(--font-family);
-    line-height: 1.5;
-    /* 16px */    
-    font-size: 1.6rem;
-  }
+  /* 62.5% of 16px browser font size is 10px */
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.5;
+  /* 16px */    
+  font-size: 1.6rem;
+}
+
+main {
+display: block;
+}
+
+body {
+width: 100%;
+margin: 0;
+}
+body > header,
+body > main,
+body > footer {
+width: 100%;
+margin-right: auto;
+margin-left: auto;
+padding: var(--block-spacing-vertical) var(--block-spacing-horizontal);
+}
+
+@media (min-width: 1200px) {
+  body > header,
+  body > main,
+  body > footer {
+    max-width: 1130px;
+}
+}
+
+section {
+  margin-bottom: var(--block-spacing-vertical);
+}
+
+
+/**
+* TABLE
+**/
+thead th,
+thead td,
+tfoot th,
+tfoot td {
+--border-width: 3px;
+}
+
+:where(table) {
+width: 100%;
+border-collapse: collapse;
+border-spacing: 0;
+text-indent: 0;
+}
+
+th,
+td {
+padding: calc(var(--spacing) / 2) var(--spacing);
+border-bottom: var(--border-width) solid var(--table-border-color);
+color: var(--color);
+font-weight: var(--font-weight);
+font-size: var(--font-size);
+text-align: left;
+text-align: start;
+}
+
+tfoot th,
+tfoot td {
+border-top: var(--border-width) solid var(--table-border-color);
+border-bottom: 0;
+}
+
+table[role=grid] tbody tr:nth-child(odd) {
+background-color: var(--table-row-stripped-background-color);
+}
+
+
 
 
 
