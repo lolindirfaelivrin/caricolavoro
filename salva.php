@@ -2,6 +2,7 @@
 session_start();
 
 require 'lib/database.php';
+require 'lib/Aiuti.php';
 require 'config.php';
 
 $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);

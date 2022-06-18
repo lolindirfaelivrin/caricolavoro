@@ -2,6 +2,7 @@
 session_start();
 
 require 'lib/database.php';
+require 'lib/Aiuti.php';
 require 'config.php';
 
 $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
@@ -29,10 +30,12 @@ $totali = totaliAllenamento($connessione);
 </header>
     <main>
         <section>
-            <p>Ciao, l'ultima volta ti sei allenato il giorno: <?php echo $ultimo->giorno; ?> per un totale di ore, 
-            <?php echo $ultimo->durata; A?>
-            con un carico di: <?php echo $ultimo->carico; ?></p>
-            <p>Al momento hai uno storico di allenamenti per un totale di ore.</p>
+            <!-- STATISTICHE ULTIMO ALLENAMENTO -->
+            <p>Ciao, l'ultima volta ti sei allenato il giorno: <b><?php echo $ultimo['giorno']; ?></b> per una durata di:
+            <b><?php echo $ultimo['durata']; ?></b> ore, ad un <b>RPE</b> di: <?php echo $ultimo['rpe']; ?>
+            che corrisponde a un <i>carico di lavoro</i> di: <b><?php echo $ultimo['carico']; ?></b></p>
+            <!-- TOTALI ALLENAMENTO -->
+            <p>Al momento hai uno storico di <b><?php echo $totali['allenamenti']; ?> allenamenti</b>. La media dei tuoi <b>RPE</b> si assesta a: <?php echo $totali['rpe']; ?>.</p>
         </section>
         <h2>Nuovo Carivo lavoro</h2>
         <section class="carico">
@@ -60,11 +63,11 @@ $totali = totaliAllenamento($connessione);
                 </select>
                 <label for="carico-allenamento">Allenamento</label>
                 <select name="carico-allenamento" id="carico-allenamento">
-                    <option value="wl">WL</option>
-                    <option value="pl">PL</option>
-                    <option value="row">ROW</option>
-                    <option value="run">RUN</option>
-                    <option value="bike">BIKE</option>
+                    <option value="weight lifting">Weight Lifting</option>
+                    <option value="power lifting">Power Lifting</option>
+                    <option value="row">Row</option>
+                    <option value="corsa">Corsa</option>
+                    <option value="bici">Bici</option>
                 </select>
                 <label for="carico-tipo">Tipo Allenamento</label>
                 <select name="carico-tipo" id="carico-tipo">
@@ -84,37 +87,34 @@ $totali = totaliAllenamento($connessione);
 
 function ultimoAllenamento($connessione) {
 
-    $sql = "SELECT rpe, DATE_FORMAT(giorno, '%d %m) as giorno, TIME_DIFF(fine, inizio) as tempo 
-    FROM carico_lavoro 
-    ORDER BY giorno DESC LIMIT 1 ";
+    $sql = "SELECT rpe, DATE_FORMAT(giorno, '%d/%m') as giorno, TIMEDIFF(fine, inizio) as tempo FROM carico_lavoro ORDER BY giorno DESC LIMIT 1";
 
-    //$stm = $coneessione->query($sql);
-
-    $row = $stm->singleRow($stm);
+    $stm = $connessione->query($sql);
+    $row = $connessione->singleRow($stm);
 
     $dati = [
         "giorno" => $row->giorno,
         "durata" => $row->tempo,
-        "carico" => $row->rpe * $row->tempo
-    ]
+        "carico" => $row->rpe * Aiuti::daOreaMinuti($row->tempo),
+        "rpe" => $row->rpe
+    ];
 
     return $dati;
 }
 
 function totaliAllenamento($connessione) {
-    $sql = "SELECT COUNT(*) FROM carico_lavoro";
+    $sql = "SELECT COUNT(*) as totale, AVG(`rpe`) as rpe_medio FROM carico_lavoro";
+
     $stm = $connessione->query($sql);
+    $row = $connessione->singleRow($stm);
 
-    $rowConteggio  = $stm->singleRow($stm);
+    $totali  = [
+        "allenamenti" => $row->totale,
+        "rpe" => round($row->rpe_medio)
+    ];
 
-    $sql = "SELECT TIME_DIFF(fine, inizio) as durata";
-    //$stm = $connessione->query($sql);
-
-    $ore = $connessione->resultSet($sql);
-
-}
-
-function sommaOre($oraInizio, $oraFine) {
+    return $totali;
 
 }
+
 ?>
