@@ -9,13 +9,16 @@ $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
 
 if(isset($_GET['id'])) {
 
-    if (filer_var($_GET['id'] < $LIMIT)   {
+    if (filer_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT) && $_GET['id'] < $LIMIT)   {
         # code...
-    }
 
-    $datiCarico = [
-        "caricoId" => filter_var( $_GET['id'], FILTER_SANITIZE_NUMBER_INT)
-    ];
+        $datiCarico = [
+            "caricoId" => filter_var( $_GET['id'], FILTER_SANITIZE_NUMBER_INT)
+        ];
+    } else {
+        $_SESSION['messaggio'] = 'Allenamento non valido, verifica!';
+        //Reindirizzo
+    }
 
     if(eliminaWod($datiCarico, $connessione)) {
 
