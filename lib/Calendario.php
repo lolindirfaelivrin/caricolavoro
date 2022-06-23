@@ -12,7 +12,7 @@ class Calendario extends DateTime
     public function __construct($anno, $mese) {
         $this->anno = $anno;
         $this->numeroMese = $mese;
-
+        $this->creaCalendario();
     }
     
     public function getAnno() {
@@ -27,19 +27,19 @@ class Calendario extends DateTime
         return $this->settimane;
     }
 
-    public function getGiorniSettima() {
+    public function getGiorniSettimana() {
         return $this->giorniSettimana;
     }
 
     public function creaCalendario() {
 
-        $date = $this->setDate($this->getAnno, $this->getNumeroMese, 1);
+        $date = $this->setDate($this->getAnno(), $this->getNumeroMese(), 1);
         $giorniNelMese =  $date->format('t');
         $giornoInizioMese = $date->format('N');
 
         $giorni = array_fill(0, ($giornoInizioMese -1), '');
 
-        for ($i=1; $i < $giorniNelMese; $i++) { 
+        for ($i=1; $i <= $giorniNelMese; $i++) { 
                 $giorni[] = $i;
         }
 

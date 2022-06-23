@@ -34,6 +34,7 @@ $dati = $connessione->resultSet($sql);
 <header>
 	<h1>Carico Lavoro</h1>
 	<a href="index.php">Aggiungi</a>
+	<a href="calendario.php">Calendario</a>
 </header>
 <section class="messaggio">
     <?php if(!empty($_SESSION['messaggio'])): ?>
