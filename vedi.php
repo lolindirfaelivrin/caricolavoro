@@ -43,8 +43,8 @@ $dati = $connessione->resultSet($sql);
         <p class="messaggio__testo messaggio__testo-successo"><?php echo $_SESSION['messaggio'];  unset($_SESSION['messaggio']);?></p>
     <?php endif; ?>
 </section>
-<section class="tabella">
-<table class="tabella__dati">
+<section>
+<table role="grid">
         <thead>
             <tr>
                 <th>#</th>

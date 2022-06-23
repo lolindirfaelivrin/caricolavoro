@@ -40,8 +40,8 @@ $calendario = new Calendario('2022', '6');
         <p class="messaggio__testo messaggio__testo-successo"><?php echo $_SESSION['messaggio'];  unset($_SESSION['messaggio']);?></p>
     <?php endif; ?>
 </section>
-<section class="tabella">
-<table class="tabella__dati">
+<section>
+<table role="grid">
         <thead>
             <tr>
                 <?php foreach ($calendario->getGiorniSettimana as $nomeGiorno): ?>
