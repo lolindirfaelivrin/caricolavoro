@@ -31,11 +31,13 @@ $dati = $connessione->resultSet($sql);
     <link rel="stylesheet" href="css/stile.css">
 </head>
 <body>
+<main>
 <header>
 	<h1>Carico Lavoro</h1>
 	<a href="index.php">Aggiungi</a>
 	<a href="calendario.php">Calendario</a>
 </header>
+
 <section class="messaggio">
     <?php if(!empty($_SESSION['messaggio'])): ?>
         <p class="messaggio__testo messaggio__testo-successo"><?php echo $_SESSION['messaggio'];  unset($_SESSION['messaggio']);?></p>
@@ -73,7 +75,7 @@ $dati = $connessione->resultSet($sql);
         </tbody>
     </table>
 </section>
-
+</main>
 </body>
 </html>
 

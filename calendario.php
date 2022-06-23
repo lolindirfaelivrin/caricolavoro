@@ -27,6 +27,9 @@ $calendario = new Calendario('2022', '6');
     <link rel="stylesheet" href="css/stile.css">
 </head>
 <body>
+    <main>
+
+
 <header>
 	<h1>Carico Lavoro</h1>
 	<a href="index.php">Aggiungi</a>
@@ -62,6 +65,6 @@ $calendario = new Calendario('2022', '6');
         </tbody>
     </table>
 </section>
-
+</main>
 </body>
 </html>
