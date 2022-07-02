@@ -7,12 +7,7 @@ require 'config.php';
 
 $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
 
-$sql = $connessione->query("SELECT id,inizio,fine,rpe,allenamento,tipo, DATE_FORMAT(giorno, '%d %m %Y') as giorno,
- TIMEDIFF(fine,inizio) as durata
- FROM carico_lavoro
- ORDER BY giorno DESC");
-
-$dati = $connessione->resultSet($sql);
+$dati = ottieniAllenamenti($connessione);
 
 ?>
 
@@ -81,12 +76,17 @@ $dati = $connessione->resultSet($sql);
 
 <?php
 
-function calcolaTempo($inizio, $fine) {
-    $inizio = strtotime($inizio);
-    $fine = strtotime($fine);     
-    $secondi = $fine - $inizio;                            
-    $intervallo = ($secondi/3600);
-    return $intervallo;
+function ottieniAllenamenti($connessione) {
+    $sql = $connessione->query("SELECT id,inizio,fine,rpe,allenamento,tipo, DATE_FORMAT(giorno, '%d %m %Y') as giorno,
+    TIMEDIFF(fine,inizio) as durata
+    FROM carico_lavoro
+    ORDER BY giorno DESC,
+    inizio DESC
+    ");
+   
+   $dati = $connessione->resultSet($sql);
+
+   return $dati;
 }
 
 ?>
