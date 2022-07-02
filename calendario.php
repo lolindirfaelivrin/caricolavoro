@@ -53,7 +53,7 @@ $nome_mese = $dateObj->format('F');
     <?php endif; ?>
 </section>
 <section>
-    <h3>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi($corrente_mese);  ?></h3>    
+    <h3>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?></h3>    
 <table role="grid">
         <thead>
             <tr>
