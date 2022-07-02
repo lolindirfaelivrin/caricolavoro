@@ -6,21 +6,21 @@ require 'lib/Calendario.php';
 require 'lib/Aiuti.php';
 require 'config.php';
 
+if(isset($_POST['filtra'])) {
+    $corrente_mese = $_POST['mese'];
+    $corrente_anno = $_POST['anno'];
+} else {
+	$corrente_mese = date("m");
+    $corrente_anno = date("Y");
+}
 
-$corrente_mese = date("m");;
-$corrente_anno = date("Y");;
 
 $connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
 
-$connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
+$allenamenti = trovaAllenamenti($corrente_anno, $corrente_mese, $connessione);
 
-$allenamenti = trovaAllenamenti($corrente_mese, $corrente_anno, $connessione);
-
-$calendario = new Calendario(2022,6);
+$calendario = new Calendario($corrente_anno,$corrente_mese);
 $calendario->creaCalendario();
-
-$dateObj   = DateTime::createFromFormat('!m', $corrente_mese);
-$nome_mese = $dateObj->format('F');
 
 ?>
 
@@ -53,7 +53,27 @@ $nome_mese = $dateObj->format('F');
     <?php endif; ?>
 </section>
 <section>
-    <h3>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?></h3>    
+    <h3>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?>( <?php echo count($allenamenti); ?> allenamenti)</h3>
+    <form action="calendario.php" method="POST">
+        <select name="anno">
+            <option value="2022">2022</option>
+        </select>
+        <select name="mese">
+            <option value="01">Gennaio</option>
+            <option value="02">Febbraio</option>
+            <option value="03">Marzo</option>
+            <option value="04">Aprile</option>
+            <option value="05">Maggio</option>
+            <option value="06">Giugno</option>
+            <option value="07">Luglio</option>
+            <option value="08">Agosto</option>
+            <option value="09">Settembre</option>
+            <option value="10">Ottobre</option>
+            <option value="11">Novembre</option>
+            <option value="12">Dicembre</option>
+        </select>
+        <input type="submit" name="filtra" value="Filtra per data">
+    </form>    
 <table role="grid">
         <thead>
             <tr>
@@ -72,7 +92,6 @@ $nome_mese = $dateObj->format('F');
                             <?php echo $numero; ?>
                         </td>
                     <?php endforeach; ?>
-
 				</tr>
             <?php endforeach;   ?>    
         </tbody>
@@ -83,7 +102,7 @@ $nome_mese = $dateObj->format('F');
 </html>
 
 <?php
-function trovaAllenamenti($mese, $anno, $connessione) {
+function trovaAllenamenti($anno, $mese, $connessione) {
 	$cerca  = $anno.'-'.$mese.'-'.'01';
 	$sql = "SELECT giorno, DAY(giorno) as giorno_settimana FROM carico_lavoro 
     WHERE MONTH(giorno)=MONTH('".$cerca."')";

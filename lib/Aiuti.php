@@ -40,15 +40,15 @@ class Aiuti
         return $result;
       }
 
-      public static function dump($variabile, $esci = true, $messaggio = '') {
+      public static function dump($variabile, $messaggio = '', $esci = true) {
         if($esci) {
-            echo "<p>".$messaggio."</p>";
+            echo "<p><b>".$messaggio."</b></p>";
             echo "<pre style=\"border: 1px solid #000; height: 9em; overflow: auto; margin: 0.5em; padding: 0.5em;\">";
             var_dump($variabile);
             echo "</pre>\n";
             exit;
         } else {
-            echo "<p>".$messaggio."</p>";
+            echo "<p><b>".$messaggio."</b></p>";
             echo "<pre style=\"border: 1px solid #000; height: 9em; overflow: auto; margin: 0.5em; padding: 0.5em;\">";
             var_dump($variabile);
             echo "</pre>\n";            
