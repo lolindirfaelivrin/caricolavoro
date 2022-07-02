@@ -31,7 +31,7 @@ $totali = totaliAllenamento($connessione);
     <main>
         <section>
             <!-- STATISTICHE ULTIMO ALLENAMENTO -->
-            <p>Ciao, l'ultima volta ti sei allenato il giorno: <b><?php echo $ultimo['giorno']; ?></b> per una durata di:
+            <p>Ciao, l'ultima volta ti sei allenato il giorno: <b><?php echo $ultimo['giorno']; ?></b> (<i><?php echo $ultimo['giorno_indietro']; ?></i> giorni fa) per una durata di:
             <b><?php echo $ultimo['durata']; ?></b> ore, ad un <b>RPE</b> di: <?php echo $ultimo['rpe']; ?>
             che corrisponde a un <i>carico di lavoro</i> di: <b><?php echo $ultimo['carico']; ?></b></p>
             <!-- TOTALI ALLENAMENTO -->
@@ -87,7 +87,9 @@ $totali = totaliAllenamento($connessione);
 
 function ultimoAllenamento($connessione) {
 
-    $sql = "SELECT rpe, DATE_FORMAT(giorno, '%d/%m') as giorno, TIMEDIFF(fine, inizio) as tempo FROM carico_lavoro ORDER BY giorno DESC LIMIT 1";
+    $sql = "SELECT rpe, DATE_FORMAT(giorno, '%d/%m') as giorno, TIMEDIFF(fine, inizio) as tempo, 
+    DATEDIFF(CURDATE(), giorno) as giorni_indietro
+    FROM carico_lavoro ORDER BY giorno DESC LIMIT 1";
 
     $stm = $connessione->query($sql);
     $row = $connessione->singleRow($stm);
@@ -95,6 +97,7 @@ function ultimoAllenamento($connessione) {
     $dati = [
         "giorno" => $row->giorno,
         "durata" => $row->tempo,
+        "giorno_indietro" => $row->giorni_indietro,
         "carico" => $row->rpe * Aiuti::daOreaMinuti($row->tempo),
         "rpe" => $row->rpe
     ];
