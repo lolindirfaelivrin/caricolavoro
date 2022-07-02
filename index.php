@@ -31,13 +31,15 @@ $totali = totaliAllenamento($connessione);
     <main>
         <section>
             <!-- STATISTICHE ULTIMO ALLENAMENTO -->
+            <h3>Statistiche ultima sessione di allenamento</h3>
             <p>Ciao, l'ultima volta ti sei allenato il giorno: <b><?php echo $ultimo['giorno']; ?></b> (<i><?php echo $ultimo['giorno_indietro']; ?></i> giorni fa) per una durata di:
             <b><?php echo $ultimo['durata']; ?></b> ore, ad un <b>RPE</b> di: <?php echo $ultimo['rpe']; ?>
-            che corrisponde a un <i>carico di lavoro</i> di: <b><?php echo $ultimo['carico']; ?></b></p>
+            che corrisponde a un <i>carico di lavoro</i> di: <b><?php echo $ultimo['carico']; ?></b>.</p>
             <!-- TOTALI ALLENAMENTO -->
+            <h3>Storico allenamenti</h3>
             <p>Al momento hai uno storico di <b><?php echo $totali['allenamenti']; ?> allenamenti</b>. La media dei tuoi <b>RPE</b> si assesta a: <?php echo $totali['rpe']; ?>.</p>
         </section>
-        <h2>Nuovo Carivo lavoro</h2>
+        <h2>Aggiungi nuovo carico lavoro</h2>
         <section class="carico">
             <form action="salva.php" method="post">
             <div class="carico__data">
