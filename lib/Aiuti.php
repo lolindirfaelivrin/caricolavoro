@@ -60,6 +60,11 @@ class Aiuti
             return $mesi[$mese];
       }
 
+      public static function nomeGiorni($giorno) {
+        $giorni = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
+        return $giorni['$giorno'];
+      }
+
 }
 
 
