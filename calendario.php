@@ -53,7 +53,9 @@ $calendario->creaCalendario();
     <?php endif; ?>
 </section>
 <section>
-    <h3>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?>( <?php echo count($allenamenti); ?> allenamenti)</h3>
+    <div class="centro">
+        <h2>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?>( <?php echo count($allenamenti); ?> allenamenti)</h2>
+    </div>
     <form action="calendario.php" method="POST">
         <select name="anno">
             <option value="2022">2022</option>
