@@ -2,13 +2,25 @@
 session_start();
 
 require 'lib/database.php';
-require 'lib/calendario.php';
+require 'lib/Calendario.php';
+require 'lib/Aiuti.php';
 require 'config.php';
 
 
-//$connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
+$corrente_mese = date("m");;
+$corrente_anno = date("Y");;
 
-$calendario = new Calendario('2022', '6');
+$connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
+
+$connessione = new Database(DB_USER,DB_NAME,DB_PASS,DB_HOST);
+
+$allenamenti = trovaAllenamenti($corrente_mese, $corrente_anno, $connessione);
+
+$calendario = new Calendario(2022,6);
+$calendario->creaCalendario();
+
+$dateObj   = DateTime::createFromFormat('!m', $corrente_mese);
+$nome_mese = $dateObj->format('F');
 
 ?>
 
@@ -41,10 +53,11 @@ $calendario = new Calendario('2022', '6');
     <?php endif; ?>
 </section>
 <section>
+    <h3>Calendario <?php echo $corrente_anno ."-". $nome_mese; ?></h3>    
 <table role="grid">
         <thead>
             <tr>
-                <?php foreach ($calendario->getGiorniSettimana as $nomeGiorno): ?>
+                <?php foreach ($calendario->getGiorniSettimana() as $nomeGiorno): ?>
                     <th>
                         <?php echo $nomeGiorno; ?>
                     </th>
@@ -55,7 +68,7 @@ $calendario = new Calendario('2022', '6');
             <?php foreach($calendario->getSettimane() as $settimana):  ?>
                 <tr>
                     <?php foreach($settimana as $numero):  ?>
-                        <td>
+                        <td class="<?php if(in_array($numero, $allenamenti)) echo"a";?>">
                             <?php echo $numero; ?>
                         </td>
                     <?php endforeach; ?>
@@ -68,3 +81,18 @@ $calendario = new Calendario('2022', '6');
 </main>
 </body>
 </html>
+
+<?php
+function trovaAllenamenti($mese, $anno, $connessione) {
+	$cerca  = $anno.'-'.$mese.'-'.'01';
+	$sql = "SELECT giorno, DAY(giorno) as giorno_settimana FROM carico_lavoro 
+    WHERE MONTH(giorno)=MONTH('".$cerca."')";
+    $stm = $connessione->query($sql);
+    $dati = $connessione->resultSet($stm);
+    
+    $giorni = array_column($dati, 'giorno_settimana');
+
+    return $giorni;
+        
+}
+?>

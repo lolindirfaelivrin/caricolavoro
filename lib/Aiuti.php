@@ -40,17 +40,36 @@ class Aiuti
         return $result;
       }
 
-      public static function dump($variabile, $esci = true) {
+      public static function dump($variabile, $esci = true, $messaggio = '') {
         if($esci) {
+            echo "<p>".$messaggio."</p>";
             echo "<pre style=\"border: 1px solid #000; height: 9em; overflow: auto; margin: 0.5em; padding: 0.5em;\">";
             var_dump($variabile);
             echo "</pre>\n";
             exit;
         } else {
+            echo "<p>".$messaggio."</p>";
             echo "<pre style=\"border: 1px solid #000; height: 9em; overflow: auto; margin: 0.5em; padding: 0.5em;\">";
             var_dump($variabile);
             echo "</pre>\n";            
         }
+      }
+
+      public static function nomeMesi($mese) {
+        $mesi = [
+        '01' => 'Gennaio', 
+        '02' => 'Febbraio', 
+        '03' => 'Marzo', 
+        '04' => 'Aprile', 
+        '05' => 'Maggio', 
+        '06' => 'Giugno', 
+        '07' => 'Luglio', 
+        '08' => 'Agosto', 
+        '09' => 'Settembre', 
+        '10' => 'Ottobre', 
+        '11' => 'Novembre', 
+        '12' => 'Dicembre'];
+        return $mesi['$mese'];
       }
 
 }
