@@ -37,6 +37,7 @@ $calendario->creaCalendario();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/stile.css">
+    <script src="js/app.js" defer></script>
 </head>
 <body>
     <main>
@@ -54,25 +55,25 @@ $calendario->creaCalendario();
 </section>
 <section>
     <div class="centro">
-        <h2>Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?>( <?php echo count($allenamenti); ?> allenamenti)</h2>
+        <h2 data-mese="<?php echo $corrente_mese; ?>">Calendario <?php echo $corrente_anno; ?> - <?php echo Aiuti::nomeMesi(($corrente_mese * 1) -1);  ?>( <?php echo count($allenamenti); ?> allenamenti)</h2>
     </div>
     <form action="calendario.php" method="POST">
         <select name="anno">
             <option value="2022">2022</option>
         </select>
         <select name="mese">
-            <option value="01">Gennaio</option>
-            <option value="02">Febbraio</option>
-            <option value="03">Marzo</option>
-            <option value="04">Aprile</option>
-            <option value="05">Maggio</option>
-            <option value="06">Giugno</option>
-            <option value="07">Luglio</option>
-            <option value="08">Agosto</option>
-            <option value="09">Settembre</option>
-            <option value="10">Ottobre</option>
-            <option value="11">Novembre</option>
-            <option value="12">Dicembre</option>
+            <option value="01" id="1" >Gennaio</option>
+            <option value="02" id="2">Febbraio</option>
+            <option value="03" id="3">Marzo</option>
+            <option value="04" id="4">Aprile</option>
+            <option value="05" id="5">Maggio</option>
+            <option value="06" id="6">Giugno</option>
+            <option value="07" id="7">Luglio</option>
+            <option value="08" id="8">Agosto</option>
+            <option value="09" id="9">Settembre</option>
+            <option value="10" id="10">Ottobre</option>
+            <option value="11" id="11">Novembre</option>
+            <option value="12" id="12">Dicembre</option>
         </select>
         <input type="submit" name="filtra" value="Filtra per data">
     </form>    
