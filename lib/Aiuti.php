@@ -65,6 +65,18 @@ class Aiuti
         return $giorni['$giorno'];
       }
 
+      public static function giorni($numero) {
+        if($numero == 0) {
+            return 'oggi';
+        }
+        if($numero == 1) {
+            return '1 giorno fa';
+        }
+        if($numero > 1) {
+            return "{$numero} giorni fa";
+        }
+      }
+
 }
 
 
