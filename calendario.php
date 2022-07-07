@@ -22,6 +22,7 @@ $allenamenti = trovaAllenamenti($corrente_anno, $corrente_mese, $connessione);
 $calendario = new Calendario($corrente_anno,$corrente_mese);
 $calendario->creaCalendario();
 
+$anni = trovaAnniAllenamento($connessione);
 ?>
 
 
@@ -59,7 +60,9 @@ $calendario->creaCalendario();
     </div>
     <form action="calendario.php" method="POST">
         <select name="anno">
-            <option value="2022">2022</option>
+            <?php foreach ($anni as $anno): ?>
+            <option value="<?php echo $anno; ?>"><?php echo $anno; ?></option>
+            <?php endforeach; ?>
         </select>
         <select name="mese">
             <option value="01" id="1" >Gennaio</option>
@@ -115,6 +118,14 @@ function trovaAllenamenti($anno, $mese, $connessione) {
     $giorni = array_column($dati, 'giorno_settimana');
 
     return $giorni;
-        
+}
+
+function trovaAnniAllenamento($connessione) {
+    $sql = "SELECT DISTINCT YEAR(giorno) as anni FROM carico_lavoro";
+    $stm = $connessione->query($sql);
+    $dati = $connessione->resultSet($stm);
+    $anni = array_column($dati, 'anni');
+
+    return $anni;
 }
 ?>
