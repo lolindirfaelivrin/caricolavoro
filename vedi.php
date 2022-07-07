@@ -80,8 +80,8 @@ function ottieniAllenamenti($connessione) {
     $sql = $connessione->query("SELECT id,inizio,fine,rpe,allenamento,tipo, DATE_FORMAT(giorno, '%d %m %Y') as giorno,
     TIMEDIFF(fine,inizio) as durata
     FROM carico_lavoro
-    ORDER BY giorno DESC,
-    inizio DESC
+    ORDER BY carico_lavoro.giorno DESC,
+    carico_lavoro.inizio DESC
     ");
    
    $dati = $connessione->resultSet($sql);
