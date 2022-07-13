@@ -3,7 +3,8 @@
 class Aiuti  
 {
     public static function reIndirizza($pagina) {
-        header("Location: http://demonation.altervista.org/minisiti/allenamento/carico/vedi.php");
+        //header("Location: http://demonation.altervista.org/minisiti/allenamento/carico/vedi.php");
+        header("Location: APP_WEB_ROOT."/".$pagina");
     }
 
     //  "1:45" nel numero totale di minuti, "105".

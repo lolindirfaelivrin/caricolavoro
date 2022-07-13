@@ -18,6 +18,9 @@ if(isset($_GET['id'])) {
     } else {
         $_SESSION['messaggio'] = 'Allenamento non valido, verifica!';
         //Reindirizzo
+        Aiuti::reIndirizza('vedi.php');
+
+
     }
 
     if(eliminaWod($datiCarico, $connessione)) {
