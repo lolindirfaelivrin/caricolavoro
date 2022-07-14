@@ -56,6 +56,19 @@ class Aiuti
         }
       }
 
+      //Crea uno script javascript per scrivere un messaggio nella console
+      //https://stackify.com/how-to-log-to-console-in-php/ 
+      public static consoleLog($messaggio, $script = true) {
+        
+        $codice = 'console.log('.json_encode($messaggio, JSON_HEX_TAG).')';
+
+        if($script) {
+            $codice = '<script>'.$codice.'</script>';
+        }
+
+        echo $codice;
+      }
+
       public static function nomeMesi($mese) {
         $mesi = ['Gennaio', 'Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
             return $mesi[$mese];
