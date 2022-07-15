@@ -13,14 +13,14 @@ class Paginazione
         $this->query = $query;
 
         $stm = $this->conenssione->query($this->query);
-        $this->totale_righe = $this->stm->num_rows;
+        $this->totale_righe = $stm->rowCount();
     }
 
     public function getDati($per_pagina = 10, $pagina = 1) {
         $this->per_pagina = $per_pagina;
         $this->pagina = $pagina;
 
-        if($this->per_pagina = "all") {
+        if($this->per_pagina == "all") {
             $query = $this->quuery;
         } else {
             $query = $this->query . " LIMIT " . (($this->pagina - 1) * $this->per_pagina) . ", $this->per_pagina";
@@ -90,9 +90,9 @@ class Paginazione
 *   $links      = ( isset( $_GET['links'] ) ) ? $_GET['links'] : 7;
 *   $query      = "SELECT City.Name, City.CountryCode, Country.Code, Country.Name AS Country, Country.Continent, Country.Region FROM City, Country WHERE City.CountryCode = Country.Code";
 *
-*   $Paginator  = new Paginator( $connessione, $query );
+*   $Paginazione  = new Paginazione( $connessione, $query );
 *
-*   $results    = $Paginator->getData( $page, $limit );
+*   $results    = $Paginazione->getDati( $page, $limit );
 *
 *   MOSTRO I DATI
 *
@@ -105,7 +105,7 @@ class Paginazione
 *        </tr>
 *   <?php endfor; ?>
 *
-*   <?php echo $Paginator->createLinks( $links, 'pagination pagination-sm' ); ?> 
+*   <?php echo $Paginazione->creaLink( $links, 'pagination pagination-sm' ); ?> 
 * 
 */
 
