@@ -35,6 +35,10 @@ class Database
         }        
     }
 
+    public function ottieniConnessione() {
+    	return $this->dbHandler;
+    }    
+
     public function query($sql) {
         $this->statement = $this->dbHandler->prepare($sql);
       }
