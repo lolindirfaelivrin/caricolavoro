@@ -14,9 +14,9 @@ if(isset($_POST)) {
         "caricoGiorno" => $_POST['carico-giorno'],
         "caricoInizio" => $_POST['carico-inizio'],
         "caricoFine" => $_POST['carico-fine'],
-        "caricoRpe" => $_POST['carico-rpe'],
-        "caricoAllenamento" => $_POST['carico-allenamento'],
-        "caricoTipo" => $_POST['carico-tipo']
+        "caricoRpe" => filter_var($_POST['carico-rpe'], FILTER_SANITIZE_NUMBER_INT),
+        "caricoAllenamento" => filter_var($_POST['carico-allenamento'], FILTER_SANITIZE_STRING),
+        "caricoTipo" => filter_var($_POST['carico-tipo'], FILTER_SANITIZE_STRING)
     ];
 
     if(salvaCarico($datiCarico, $connessione)) {
