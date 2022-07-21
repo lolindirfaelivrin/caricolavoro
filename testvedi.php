@@ -7,7 +7,7 @@ require 'lib/Aiuti.php';
 require 'config.php';
 
 
-$limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 25;
+$limit      = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 5;
 $page       = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 10;
 $links      = ( isset( $_GET['links'] ) ) ? $_GET['links'] : 5;
 
@@ -63,6 +63,6 @@ $dati = $Paginazione->getDati( $page, $limit );
             <?php endforeach;   ?>   
         </tbody>
     </table>
-    <?php  echo $Paginazione->creaLink($links, 'pagination pagination-sm'); ?> ∏
+    <?php  echo $Paginazione->creaLink($links, 'pagination pagination-sm'); ?>
 </body>
 </html>
