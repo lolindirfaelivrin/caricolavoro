@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'lib/database.php';
+require 'lib/Database.php';
 require 'config.php';
 
 
