@@ -20,15 +20,15 @@ class Paginazione
         $this->per_pagina = $per_pagina;
         $this->pagina = $pagina;
 
-        if($this->per_pagina == "all") {
-            $query = $this->quuery;
+        if($this->per_pagina == "0") {
+            $query = $this->query;
         } else {
             $query = $this->query . " LIMIT " . (($this->pagina - 1) * $this->per_pagina) . ", $this->per_pagina";
         }
 
         $stm = $this->conenssione->query($query);
 
-        while ( $row = $rs->fetch_assoc() ) {
+        while ( $row = $stm->fetch(PDO::FETCH_ASSOC) ) {
             $results[]  = $row;
         }
      
@@ -43,11 +43,22 @@ class Paginazione
     }
 
     public function creaLink($collegamenti_per_pagina, $stile_css) {
-        if ( $this->per_pagina == 'all' ) {
+        if ( $this->per_pagina == "0" ) {
             return '';
         }
      
         $last       = ceil( $this->totale_righe / $this->per_pagina );
+        if($last > 0) {
+            for ($i = 1; $i<= $last; $i++) {
+                $html .= <<<LINK
+                    <a class="{$stile_css}" href="?pagina={$i}&per-pagina={$this->per_pagina}">{$i}</a>
+                
+                LINK;
+
+            }
+        }
+
+        /**
      
         $start      = ( ( $this->per_pagina - $collegamenti_per_pagina ) > 0 ) ? $this->per_pagina - $collegamenti_per_pagina : 1;
         $end        = ( ( $this->per_pagina + $collegamenti_per_pagina ) < $last ) ? $this->per_pagina + $collegamenti_per_pagina : $last;
@@ -55,27 +66,32 @@ class Paginazione
         $html       = '';
      
         $class      = ( $this->per_pagina == 1 ) ? "disabled" : "";
-        $html       .= '<a href="?limit=' . $this->per_pagina . '&page=' . ( $this->pagina - 1 ) . '">&laquo;</a>';
+        $html       .= '<a href="?per-pagina=' . $this->per_pagina . '&pagina=' . ( $this->pagina - 1 ) . '">&laquo;</a>';
      
         if ( $start > 1 ) {
-            $html   .= '<a href="?limit=' . $this->per_pagina . '&page=1">1</a>';
+            $html   .= '<a href="?limit=' . $this->per_pagina . '&pagina=1">1</a>';
             $html   .= '<a class="disabled"><span>...</span></a>';
         }
      
         for ( $i = $start ; $i <= $end; $i++ ) {
             $class  = ( $this->per_pagina == $i ) ? "active" : "";
-            $html   .= '<a href="?limit=' . $this->per_pagina . '&page=' . $i . '">' . $i . '</a>';
+            $html   .= '<a href="?per-pagina=' . $this->per_pagina . '&pagina=' . $i . '">' . $i . '</a>';
         }
      
         if ( $end < $last ) {
             $html   .= '<a class="disabled"><span>...</span></a>';
-            $html   .= '<a href="?limit=' . $this->per_pagina . '&page=' . $last . '">' . $last . '</a></li>';
+            $html   .= '<a href="?per-pagina=' . $this->per_pagina . '&pagina=' . $last . '">' . $last . '</a></li>';
         }
      
         $class      = ( $this->pagina == $last ) ? "disabled" : "";
-        $html       .= '<a href="?limit=' . $this->per_pagina . '&page=' . ( $this->pagina + 1 ) . '">&raquo;</a>';
+        $html       .= '<a href="?per-pagina=' . $this->per_pagina . '&pagina=' . ( $this->pagina + 1 ) . '">&raquo;</a>';
+        */
      
         return $html;
+    }
+
+    public function totaleRighe() {
+        return $this->totale_righe;
     }
 }
 
